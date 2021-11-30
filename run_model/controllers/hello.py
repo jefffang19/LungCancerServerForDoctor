@@ -34,9 +34,10 @@ def hello_template(request):
         form = UploadFileForm(request.POST, request.FILES)
         # handle upload file
         if form.is_valid():
-            handle_uploaded_file(request.FILES['file'], request.POST['title'])
+            handle_uploaded_file(
+                request.FILES['file'], request.POST['description'])
 
-            print(request.FILES['file'].name)
+            # print(request.FILES['file'].name)
 
             # filename for template to display
             shutil.copyfile(os.path.join('run_model/static/run_model/uploaded_files',
