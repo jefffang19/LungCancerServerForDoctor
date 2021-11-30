@@ -36,6 +36,8 @@ def hello_template(request):
         if form.is_valid():
             handle_uploaded_file(request.FILES['file'], request.POST['title'])
 
+            print(request.FILES['file'].name)
+
             # filename for template to display
             shutil.copyfile(os.path.join('run_model/static/run_model/uploaded_files',
                                          request.POST['title']) + '.png', 'run_model/static/run_model/uploaded_files/uploaded.png')
