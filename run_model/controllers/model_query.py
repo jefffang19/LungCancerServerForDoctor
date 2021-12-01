@@ -16,4 +16,4 @@ def create_query(list_of_cases, show_output=True):
 
         # run the subprocess of inference.py, and DON't wait
         process = subprocess.Popen(
-            ['python', 'run_model/pytorch/inference.py', os.path.join(case.file_path, case.inner_uuid + '.' + case.file_type)])
+            ['python', 'run_model/pytorch/inference.py', os.path.join(case.file_path, case.inner_uuid + '.' + case.file_type), str(case.pk)])
