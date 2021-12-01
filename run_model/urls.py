@@ -12,4 +12,6 @@ urlpatterns = [
     path('get_csrf_token', views.get_csrf_token, name='get_csrf_token'),
     # update model query
     path('update_query', views.update_query, name='update_query'),
+    # save model predict result
+    path('save_result', views.save_result, name='save_result'),
 ]

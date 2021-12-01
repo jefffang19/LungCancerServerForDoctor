@@ -67,4 +67,15 @@ if __name__ == '__main__':
     URL = 'http://127.0.0.1:5757/run_model/update_query'
     r = client.post(URL, data=post_data, headers=dict(Referer=URL))
 
-    print('request result: ', r)
+    print('model query request result: ', r)
+
+    # POST the confidence of prediction to model predict
+    post_data = {'case_id': case_id, 'path': os.path.join('run_model/static/run_model/patches', file_name),
+                 'p0': results[0], 'p1': results[1], 'p2': results[2], 'p3': results[3], 'p4': results[4], 'p5': results[5], 'p6': results[6], 'p7': results[7],
+                 'p8': results[8], 'p9': results[9], 'p10': results[10], 'p11': results[11], 'p12': results[12], 'p13': results[13], 'p14': results[14], 'p15': results[15],
+                 'csrfmiddlewaretoken': csrftoken}
+
+    URL = 'http://127.0.0.1:5757/run_model/save_result'
+    r = client.post(URL, data=post_data, headers=dict(Referer=URL))
+
+    print('model predict request result: ', r)
