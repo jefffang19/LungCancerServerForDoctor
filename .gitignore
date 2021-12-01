@@ -142,5 +142,8 @@ GitHub.sublime-settings
 # upload file
 run_model/static/run_model/uploaded_files/*
 
+# patches files
+run_model/static/run_model/patches/*
+
 # pytorch
 *.pth
