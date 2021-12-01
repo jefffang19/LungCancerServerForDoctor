@@ -139,3 +139,8 @@ GitHub.sublime-settings
 !.vscode/extensions.json 
 .history
 
+# upload file
+run_model/static/run_model/uploaded_files/*
+
+# pytorch
+*.pth

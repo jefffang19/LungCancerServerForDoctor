@@ -1,11 +1,12 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from ..forms import UploadFileForm
-from ..models import Case
+from run_model.forms import UploadFileForm
+from run_model.models import Case
 import os
 import shutil
 from django.utils import timezone
 import uuid
+from .model_query import *
 
 SAVE_FILE_PATH = 'run_model/static/run_model/uploaded_files/'
 
@@ -34,8 +35,11 @@ def upload_page(request):
 
             # save this record
             case = Case(description=request.POST['description'], upload_time=timezone.now(
-            ), inference_time=timezone.now(), inner_uuid=generated_UUID + '.' + file_type, origin_file_name=request.FILES['file'].name, file_path=SAVE_FILE_PATH)
+            ), inference_time=timezone.now(), inner_uuid=generated_UUID, origin_file_name=request.FILES['file'].name, file_path=SAVE_FILE_PATH, file_type=file_type)
             case.save()
+
+            # create a model query
+            create_query([case])
 
             return HttpResponse("file upload success")
         else:

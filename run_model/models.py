@@ -16,6 +16,6 @@ class Case(models.Model):
 class Modelquery(models.Model):
     case = models.OneToOneField(
         Case, on_delete=models.CASCADE, primary_key=True)
-    state = models.IntegerField()
+    state = models.IntegerField()  # 0 idle, 1 pendding, 2 finsih, 3 run model error
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
