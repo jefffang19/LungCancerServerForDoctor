@@ -10,5 +10,6 @@ urlpatterns = [
     path('upload_page', views.upload_page, name='upload_page'),
     # get csrf token
     path('get_csrf_token', views.get_csrf_token, name='get_csrf_token'),
-    # create model query
+    # update model query
+    path('update_query', views.update_query, name='update_query'),
 ]

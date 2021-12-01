@@ -50,8 +50,21 @@ if __name__ == '__main__':
     # https://stackoverflow.com/questions/13567507/passing-csrftoken-with-python-requests
     # Retrieve the CSRF token first
     client.get('http://127.0.0.1:5757/run_model/get_csrf_token')  # sets cookie
+
+    csrftoken = None
     if 'csrftoken' in client.cookies:
         # Django 1.6 and up
         csrftoken = client.cookies['csrftoken']
+    else:
+        print('cannot get csrf token')
 
-        print(csrftoken)
+    # print(csrftoken)
+
+    # POST the complete state to model query
+    post_data = {'case_id': case_id, 'state': 2,
+                 'csrfmiddlewaretoken': csrftoken}
+
+    URL = 'http://127.0.0.1:5757/run_model/update_query'
+    r = client.post(URL, data=post_data, headers=dict(Referer=URL))
+
+    print('request result: ', r)
