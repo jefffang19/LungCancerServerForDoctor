@@ -7,6 +7,10 @@ if __name__ == '__main__':
     if len(sys.argv) == 1:  # no cases to take care of
         exit()
 
-    time.sleep(5)
     # each argv is a image file path
-    print(sys.argv[1])
+    file_path = sys.argv[1]
+
+    # read image
+    img = cv2.imread(file_path, 0)  # read as graysacle
+
+    cv2.imwrite('test.png', img)
