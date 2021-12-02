@@ -7,6 +7,7 @@ import shutil
 from django.utils import timezone
 import uuid
 from .model_query import *
+from .history_controller import *
 
 SAVE_FILE_PATH = 'run_model/static/run_model/uploaded_files/'
 

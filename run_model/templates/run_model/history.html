@@ -151,6 +151,7 @@
                                 <table class="table my-0" id="dataTable">
                                     <thead>
                                         <tr>
+                                            <th>Id</th>
                                             <th>Image</th>
                                             <th>Inference Status</th>
                                             <th>Image Name</th>
@@ -158,37 +159,22 @@
                                             <th>Nodule Probability</th>
                                             <th>Upload Time</th>
                                             <th>Difficult Case</th>
+                                            <th>Inspect</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td><img class="img-thumbnail me-2" width="224" height="224" src="{% static 'assets/img/dogs/sample_icon.png' %}"></td>
-                                            <td>Done</td>
-                                            <td>Airi Satou</td>
-                                            <td>Accountant</td>
-                                            <td>Tokyo</td>
-                                            <td>2008/11/28</td>
-                                            <td>True</td>
-                                        </tr>
-                                        <tr>
-                                            <td><img class="img-thumbnail me-2" width="224" height="224" src="{% static 'assets/img/dogs/sample_icon.png' %}"></td>
-                                            <td>Inferencing</td>
-                                            <td>Angelica Ramos</td>
-                                            <td>Chief Executive Officer(CEO)</td>
-                                            <td>London</td>
-                                            <td>2009/10/09<br></td>
-                                            <td>False<br></td>
-                                        </tr>
+                                    <tbody id="table_content">
                                     </tbody>
                                     <tfoot>
                                         <tr>
+                                            <th>Id</th>
                                             <td><strong>Image</strong></td>
                                             <td><strong>Image Name</strong></td>
                                             <td><strong>Image Name</strong></td>
                                             <td><strong>Description</strong></td>
                                             <td><strong>Nodule Probability</strong></td>
                                             <td><strong>Upload Time</strong></td>
-                                            <td>Difficult Case</td>
+                                            <td><strong>Difficult Case</strong></td>
+                                            <td><strong>Inspect</strong></td>
                                         </tr>
                                     </tfoot>
                                 </table>
@@ -219,9 +205,44 @@
             </footer>
         </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     </div>
+    {% comment %} theme {% endcomment %}
     <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'assets/js/bs-init.js' %}"></script>
     <script src="{% static 'assets/js/theme.js' %}"></script>
+
+    {% comment %} jquery {% endcomment %}
+    <script src="{% static 'js/jquery_min_3_5_1.js' %}"></script>
+	<script>
+        var image_path = {{ image_path|safe }};
+		var inference_status = {{ inference_status|safe }};
+        var image_name = {{ image_name|safe }};
+        var description = {{ description|safe }};
+        var nodule_prob = {{ nodule_prob|safe }};
+        var upload_time = {{ upload_time|safe }};
+        var difficult_case = {{ difficult_case|safe }};
+        var ids = {{ ids|safe }};
+
+		// console.log(patient_id);
+		table_html = "";
+
+		// render the table
+		for (i=0;i<image_path.length;i++){
+			var path = image_path[i];
+
+			table_html += '<tr>' + '<td>' + i + '</td>' +
+                                                         '<td>' + '<img class="img-thumbnail me-2" width="224" height="224" src=' + path +  '>' + '</td>' +
+														'<td>' + inference_status[i] + '</td>' +
+                                                        '<td>' + image_name[i] + '</td>' +
+                                                        '<td>' + description[i] + '</td>' +
+														'<td>' + nodule_prob[i] + '</td>' +
+                                                        '<td>' + upload_time[i] + '</td>' +
+                                                        '<td>' + difficult_case[i] + '</td>' + 
+                                                        '<td><button type="button" class="btn btn-primary" onclick="location.href=\'/run_model/show_case/' + ids[i] + '\'"/>Inspect</button></td></tr>';
+		}
+
+		document.getElementById("table_content").innerHTML = table_html;
+	</script>
+
 </body>
 
 </html>

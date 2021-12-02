@@ -3,6 +3,7 @@ from .controllers.hello import *
 from .controllers.upload_file import *
 from .controllers.model_query import *
 from .controllers.template_controller import *
+from .controllers.history_controller import *
 
 # Create your views here.
 
