@@ -1,6 +1,10 @@
 from django.shortcuts import render
 from run_model.models import Case, Modelquery, Modelpredict
 import os
+import numpy as np
+
+# threshold of nodule probability
+PROB_TRHESH = 0.7
 
 
 def show_result(request, case_id):
@@ -30,6 +34,19 @@ def show_result(request, case_id):
 
     # get patches saved location
     template_dict['patch_loc'] = mp.predict_path[9:]
+
+    # calculate model statistic
+    prob = [mp.predict_prob_0, mp.predict_prob_1, mp.predict_prob_2, mp.predict_prob_3, mp.predict_prob_4, mp.predict_prob_5, mp.predict_prob_6, mp.predict_prob_7,
+            mp.predict_prob_8, mp.predict_prob_9, mp.predict_prob_10, mp.predict_prob_11, mp.predict_prob_12, mp.predict_prob_13, mp.predict_prob_14, mp.predict_prob_15]
+    prob = np.array(prob)
+
+    template_dict['positive_count'] = np.where(prob > PROB_TRHESH, 1, 0).sum()
+    template_dict['positive_count_rate'] = np.where(
+        prob > PROB_TRHESH, 1, 0).sum() / 16 * 100
+    template_dict['highest_prob'] = np.max(prob) * 100
+    template_dict['average_prob'] = np.where(
+        prob > PROB_TRHESH, prob, 0).sum() / np.where(prob > PROB_TRHESH, 1, 0).sum() * 100
+    template_dict['pos_thresh'] = PROB_TRHESH * 100
 
     return render(request, 'run_model/show_result.html', template_dict)
 

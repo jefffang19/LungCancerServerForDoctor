@@ -394,26 +394,26 @@
                                             <h6 class="text-primary fw-bold m-0">Result</h6>
                                         </div>
                                         <div class="card-body">
-                                            <h4 class="small fw-bold">Positive Patches<span class="float-end">20%</span></h4>
+                                            <h4 class="small fw-bold">Positive Patches<span class="float-end">{{ positive_count }}</span></h4>
                                             <div class="progress progress-sm mb-3">
-                                                <div class="progress-bar bg-danger" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%;"><span class="visually-hidden">20%</span></div>
+                                                <div class="progress-bar bg-danger" aria-valuenow="{{ positive_count_rate }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ positive_count_rate }}%;"><span class="visually-hidden">{{ positive_count_rate }}%</span></div>
                                             </div>
-                                            <h4 class="small fw-bold">Highest Probability<span class="float-end">40%</span></h4>
+                                            <h4 class="small fw-bold">Highest Probability<span class="float-end">{{ highest_prob }}%</span></h4>
                                             <div class="progress progress-sm mb-3">
-                                                <div class="progress-bar bg-warning" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%;"><span class="visually-hidden">40%</span></div>
+                                                <div class="progress-bar bg-warning" aria-valuenow="{{ highest_prob }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ highest_prob }}%;"><span class="visually-hidden">{{ highest_prob }}%</span></div>
                                             </div>
-                                            <h4 class="small fw-bold">Average Positivity Probability<span class="float-end">60%</span></h4>
+                                            <h4 class="small fw-bold">Average Positivity Probability<span class="float-end">{{ average_prob }}%</span></h4>
                                             <div class="progress progress-sm mb-3">
-                                                <div class="progress-bar bg-primary" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"><span class="visually-hidden">60%</span></div>
+                                                <div class="progress-bar bg-primary" aria-valuenow="{{ average_prob }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ average_prob }}%;"><span class="visually-hidden">{{ average_prob }}%</span></div>
                                             </div>
                                         </div>
                                         <div class="card-header py-3">
                                             <h6 class="text-primary fw-bold m-0">Threshold</h6>
                                         </div>
                                         <div class="card-body">
-                                            <h4 class="small fw-bold">Positive Threshold<span class="float-end">20%</span></h4>
+                                            <h4 class="small fw-bold">Positive Threshold<span class="float-end">{{ pos_thresh }}%</span></h4>
                                             <div class="progress progress-sm mb-3">
-                                                <div class="progress-bar bg-success" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%;"><span class="visually-hidden">20%</span></div>
+                                                <div class="progress-bar bg-success" aria-valuenow="{{ pos_thresh }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ pos_thresh }}%;"><span class="visually-hidden">{{ pos_thresh }}%</span></div>
                                             </div>
                                         </div>
                                     </div>
