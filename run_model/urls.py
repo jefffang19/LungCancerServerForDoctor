@@ -9,7 +9,7 @@ urlpatterns = [
     path('test_img', views.hello_img, name='test_img'),
     ##################
     # upload file
-    path('upload_page', views.upload_page, name='upload_page'),
+    # path('upload_page', views.upload_page, name='upload_page'),
     # get csrf token
     path('get_csrf_token', views.get_csrf_token, name='get_csrf_token'),
     # update model query
@@ -19,7 +19,8 @@ urlpatterns = [
     # template controller
     path('', views.index, name='index'),
     path('history', views.history, name='history'),
-    path('upload_case', views.upload_case, name='upload_case'),
+    path('upload_case', views.upload_page, name='upload_case'),
+    path('show_case', views.show_result, name='show_case'),
     path('login', views.login, name='login'),
     path('register', views.register, name='register'),
 ]

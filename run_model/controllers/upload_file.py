@@ -48,4 +48,4 @@ def upload_page(request):
     else:
         form = UploadFileForm()
 
-        return render(request, 'run_model/upload_page.html', {'form': form})
+        return render(request, 'run_model/upload_case.html', {'form': form})

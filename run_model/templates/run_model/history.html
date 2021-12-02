@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 {% load static %}
 <html>
 
@@ -153,6 +152,7 @@
                                     <thead>
                                         <tr>
                                             <th>Image</th>
+                                            <th>Inference Status</th>
                                             <th>Image Name</th>
                                             <th>Description</th>
                                             <th>Nodule Probability</th>
@@ -163,6 +163,7 @@
                                     <tbody>
                                         <tr>
                                             <td><img class="img-thumbnail me-2" width="224" height="224" src="{% static 'assets/img/dogs/sample_icon.png' %}"></td>
+                                            <td>Done</td>
                                             <td>Airi Satou</td>
                                             <td>Accountant</td>
                                             <td>Tokyo</td>
@@ -171,6 +172,7 @@
                                         </tr>
                                         <tr>
                                             <td><img class="img-thumbnail me-2" width="224" height="224" src="{% static 'assets/img/dogs/sample_icon.png' %}"></td>
+                                            <td>Inferencing</td>
                                             <td>Angelica Ramos</td>
                                             <td>Chief Executive Officer(CEO)</td>
                                             <td>London</td>
@@ -182,10 +184,11 @@
                                         <tr>
                                             <td><strong>Image</strong></td>
                                             <td><strong>Image Name</strong></td>
+                                            <td><strong>Image Name</strong></td>
                                             <td><strong>Description</strong></td>
                                             <td><strong>Nodule Probability</strong></td>
                                             <td><strong>Upload Time</strong></td>
-                                            <td><strong>Difficult Case</strong></td>
+                                            <td>Difficult Case</td>
                                         </tr>
                                     </tfoot>
                                 </table>

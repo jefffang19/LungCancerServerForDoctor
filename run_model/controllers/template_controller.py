@@ -17,5 +17,5 @@ def register(request):
     return render(request, 'run_model/register.html')
 
 
-def upload_case(request):
-    return render(request, 'run_model/upload_case.html')
+def show_result(request):
+    return render(request, 'run_model/show_result.html')
