@@ -38,6 +38,7 @@ def show_result(request, case_id):
     # calculate model statistic
     prob = [mp.predict_prob_0, mp.predict_prob_1, mp.predict_prob_2, mp.predict_prob_3, mp.predict_prob_4, mp.predict_prob_5, mp.predict_prob_6, mp.predict_prob_7,
             mp.predict_prob_8, mp.predict_prob_9, mp.predict_prob_10, mp.predict_prob_11, mp.predict_prob_12, mp.predict_prob_13, mp.predict_prob_14, mp.predict_prob_15]
+    template_dict['prob'] = prob
     prob = np.array(prob)
 
     template_dict['positive_count'] = np.where(prob > PROB_TRHESH, 1, 0).sum()
