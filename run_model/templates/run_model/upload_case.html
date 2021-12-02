@@ -133,8 +133,18 @@
                         <div class="col-lg-4">
                             <div class="card mb-3">
                                 <div class="card-body text-center shadow">
-                                    <form></form>
-                                    <div class="mb-3"><button class="btn btn-primary btn-sm" type="button">Upload</button></div>
+                                    <form action={% url 'upload_case' %} method="post" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        {% for field in form %}
+                                            <div class="form-group">
+                                            {{ field.label_tag }}
+                                            {{ field }}
+                                            {{ field.errors }}
+                                            </div>
+                                        {% endfor %}
+                                        {% comment %} <input type="submit" value="Submit"> {% endcomment %}
+                                        <div class="mb-3"><button class="btn btn-primary btn-sm" type="submit">Upload</button></div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
