@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from run_model.models import Case, Modelquery, Modelpredict
+import os
 
 
 def show_result(request, case_id):
@@ -8,7 +9,8 @@ def show_result(request, case_id):
 
     # get image information
     template_dict = {'id': case_id, 'description': case.description,
-                     'upload_time': case.upload_time, 'image_name': case.origin_file_name}
+                     'upload_time': case.upload_time, 'image_name': case.origin_file_name,
+                     'origin_image_path': os.path.join(case.file_path[9:], case.inner_uuid) + '.' + case.file_type}
 
     # get predict result
     mp = Modelpredict.objects.get(case=case)
@@ -24,6 +26,6 @@ def show_result(request, case_id):
         'p15'] = mp.predict_prob_12, mp.predict_prob_13, mp.predict_prob_14, mp.predict_prob_15
 
     # get patches saved location
-    template_dict['patch_loc'] = mp.predict_path
+    template_dict['patch_loc'] = mp.predict_path[9:]
 
     return render(request, 'run_model/show_result.html', template_dict)

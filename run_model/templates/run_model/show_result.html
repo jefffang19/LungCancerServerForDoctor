@@ -140,10 +140,30 @@
                                                     <div class="row">
                                                         <div class="col">
                                                             <p class="text-primary m-0 fw-bold">Image</p>
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <div class="row">
+                                                                        <div class="col">
+                                                                            <em>{{ image_name }}</em>
+                                                                            <div class="row">
+                                                                                <div class="col">
+                                                                                    <span>Description : </span>
+                                                                                    <em>{{ description }}</em>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="col">
+                                                                                    <em>{{ upload_time }}</em>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="row">
-                                                        <div class="col"><img width="500" height="668" src="{% static 'assets/img/dogs/sample_icon.png' %}"></div>
+                                                        <div class="col"><img width="600" src="{{ origin_image_path }}"></div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col"><button class="btn btn-primary" type="button">Show Original</button></div>
@@ -164,17 +184,17 @@
                                                                                     <div class="row">
                                                                                         <div class="col">
                                                                                             <div class="row">
-                                                                                                <div class="col"><img>
+                                                                                                <div class="col"><img id="p0" type="image" src="{{ patch_loc }}/x0.png" width="100" onclick=""/>
                                                                                                     <div class="row">
                                                                                                         <div class="col">
-                                                                                                            <h6>Heading</h6>
+                                                                                                            <h6>{{ p0 }}</h6>
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 </div>
-                                                                                                <div class="col"><img>
+                                                                                                <div class="col"><img id="p1" type="image" src="{{ patch_loc }}/x1.png" width="100" onclick=""/>
                                                                                                     <div class="row">
                                                                                                         <div class="col">
-                                                                                                            <h6>Heading</h6>
+                                                                                                            <h6>{{ p1 }}</h6>
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 </div>
@@ -184,49 +204,49 @@
                                                                                 </div>
                                                                             </div>
                                                                             <div class="row">
-                                                                                <div class="col"><img>
+                                                                                <div class="col"><img id="p4" type="image" src="{{ patch_loc }}/x4.png" width="100" onclick=""/>
                                                                                     <div class="row">
                                                                                         <div class="col">
-                                                                                            <h6>Heading</h6>
+                                                                                            <h6>{{ p4 }}</h6>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
-                                                                                <div class="col"><img>
+                                                                                <div class="col"><img id="p5" type="image" src="{{ patch_loc }}/x5.png" width="100" onclick=""/>
                                                                                     <div class="row">
                                                                                         <div class="col">
-                                                                                            <h6>Heading</h6>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="row">
-                                                                                <div class="col"><img>
-                                                                                    <div class="row">
-                                                                                        <div class="col">
-                                                                                            <h6>Heading</h6>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="col"><img>
-                                                                                    <div class="row">
-                                                                                        <div class="col">
-                                                                                            <h6>Heading</h6>
+                                                                                            <h6>{{ p5 }}</h6>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="row">
-                                                                                <div class="col"><img>
+                                                                                <div class="col"><img id="p8" type="image" src="{{ patch_loc }}/x8.png" width="100" onclick=""/>
                                                                                     <div class="row">
                                                                                         <div class="col">
-                                                                                            <h6>Heading</h6>
+                                                                                            <h6>{{ p8 }}</h6>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
-                                                                                <div class="col"><img>
+                                                                                <div class="col"><img id="p9" type="image" src="{{ patch_loc }}/x9.png" width="100" onclick=""/>
                                                                                     <div class="row">
                                                                                         <div class="col">
-                                                                                            <h6>Heading</h6>
+                                                                                            <h6>{{ p9 }}</h6>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="col"><img id="p12" type="image" src="{{ patch_loc }}/x12.png" width="100" onclick=""/>
+                                                                                    <div class="row">
+                                                                                        <div class="col">
+                                                                                            <h6>{{ p12 }}</h6>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col"><img id="p13" type="image" src="{{ patch_loc }}/x13.png" width="100" onclick=""/>
+                                                                                    <div class="row">
+                                                                                        <div class="col">
+                                                                                            <h6>{{ p13 }}</h6>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -243,17 +263,17 @@
                                                                                     <div class="row">
                                                                                         <div class="col">
                                                                                             <div class="row">
-                                                                                                <div class="col"><img>
+                                                                                                <div class="col"><img id="p2" type="image" src="{{ patch_loc }}/x2.png" width="100" onclick=""/>
                                                                                                     <div class="row">
                                                                                                         <div class="col">
-                                                                                                            <h6>Heading</h6>
+                                                                                                            <h6>{{ p2 }}</h6>
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 </div>
-                                                                                                <div class="col"><img>
+                                                                                                <div class="col"><img id="p3" type="image" src="{{ patch_loc }}/x3.png" width="100" onclick=""/>
                                                                                                     <div class="row">
                                                                                                         <div class="col">
-                                                                                                            <h6>Heading</h6>
+                                                                                                            <h6>{{ p3 }}</h6>
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 </div>
@@ -263,49 +283,49 @@
                                                                                 </div>
                                                                             </div>
                                                                             <div class="row">
-                                                                                <div class="col"><img>
+                                                                                <div class="col"><img id="p6" type="image" src="{{ patch_loc }}/x6.png" width="100" onclick=""/>
                                                                                     <div class="row">
                                                                                         <div class="col">
-                                                                                            <h6>Heading</h6>
+                                                                                            <h6>{{ p6 }}</h6>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
-                                                                                <div class="col"><img>
+                                                                                <div class="col"><img id="p7" type="image" src="{{ patch_loc }}/x7.png" width="100" onclick=""/>
                                                                                     <div class="row">
                                                                                         <div class="col">
-                                                                                            <h6>Heading</h6>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="row">
-                                                                                <div class="col"><img>
-                                                                                    <div class="row">
-                                                                                        <div class="col">
-                                                                                            <h6>Heading</h6>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="col"><img>
-                                                                                    <div class="row">
-                                                                                        <div class="col">
-                                                                                            <h6>Heading</h6>
+                                                                                            <h6>{{ p7 }}</h6>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="row">
-                                                                                <div class="col"><img>
+                                                                                <div class="col"><img id="p10" type="image" src="{{ patch_loc }}/x10.png" width="100" onclick=""/>
                                                                                     <div class="row">
                                                                                         <div class="col">
-                                                                                            <h6>Heading</h6>
+                                                                                            <h6>{{ p10 }}</h6>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
-                                                                                <div class="col"><img>
+                                                                                <div class="col"><img id="p11" type="image" src="{{ patch_loc }}/x11.png" width="100" onclick=""/>
                                                                                     <div class="row">
                                                                                         <div class="col">
-                                                                                            <h6>Heading</h6>
+                                                                                            <h6>{{ p11 }}</h6>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="col"><img id="p14" type="image" src="{{ patch_loc }}/x14.png" width="100" onclick=""/>
+                                                                                    <div class="row">
+                                                                                        <div class="col">
+                                                                                            <h6>{{ p14 }}</h6>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col"><img id="p15" type="image" src="{{ patch_loc }}/x15.png" width="100" onclick=""/>
+                                                                                    <div class="row">
+                                                                                        <div class="col">
+                                                                                            <h6>{{ p15 }}</h6>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -413,9 +433,16 @@
             </footer>
         </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     </div>
+    {% comment %} theme {% endcomment %}
     <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'assets/js/bs-init.js' %}"></script>
     <script src="{% static 'assets/js/theme.js' %}"></script>
+
+    {% comment %} jquery {% endcomment %}
+    <script src="{% static 'js/jquery_min_3_5_1.js' %}"></script>
+	<script>
+        var id = {{ id }};
+	</script>
 </body>
 
 </html>

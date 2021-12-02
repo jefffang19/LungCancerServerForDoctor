@@ -11,7 +11,3 @@ def login(request):
 
 def register(request):
     return render(request, 'run_model/register.html')
-
-
-def show_result(request):
-    return render(request, 'run_model/show_result.html')
