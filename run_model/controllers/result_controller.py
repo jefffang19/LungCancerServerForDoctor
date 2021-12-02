@@ -4,6 +4,9 @@ import os
 
 
 def show_result(request, case_id):
+    '''
+    display model predict results
+    '''
     # get wanted case
     case = Case.objects.get(pk=case_id)
 
@@ -29,3 +32,16 @@ def show_result(request, case_id):
     template_dict['patch_loc'] = mp.predict_path[9:]
 
     return render(request, 'run_model/show_result.html', template_dict)
+
+
+def show_raw_origin_image(request, case_id):
+    '''
+    display raw origin  xray image
+    '''
+    # get wanted case
+    case = Case.objects.get(pk=case_id)
+
+    template_dict = {'path': os.path.join(
+        case.file_path[9:], case.inner_uuid) + '.' + case.file_type}
+
+    return render(request, 'run_model/origin_raw.html', template_dict)
