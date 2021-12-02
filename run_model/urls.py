@@ -20,7 +20,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('history', views.history, name='history'),
     path('upload_case', views.upload_page, name='upload_case'),
-    path('show_case', views.show_result, name='show_case'),
+    path('show_case/<int:case_id>', views.show_result, name='show_case_id'),
     path('login', views.login, name='login'),
     path('register', views.register, name='register'),
 ]
