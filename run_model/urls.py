@@ -19,6 +19,7 @@ urlpatterns = [
     # template controller
     path('', views.index, name='index'),
     path('history', views.history, name='history'),
+    path('history_data', views.history_data, name='history_data'),
     path('upload_case', views.upload_page, name='upload_case'),
     path('show_case/<int:case_id>', views.show_result, name='show_case_id'),
     path('show_raw/<int:case_id>', views.show_raw_origin_image),

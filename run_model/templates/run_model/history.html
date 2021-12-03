@@ -224,6 +224,9 @@
 
         fillTable();
 
+        // update table after 7 second
+        setInterval(updateTable,10000);
+
         function fillTable(){
             // console.log(patient_id);
             table_html = "";
@@ -261,6 +264,31 @@
                 document.getElementById("nod_prob_" + i).style = "color:red;"; 
                 }
             }
+        }
+
+        // update table if some rows are still pending
+        function updateTable(){
+            $.ajax({
+                url: "/run_model/history_data",
+                type: 'GET',
+                success: function (data) {
+                    
+                    image_path = data['image_path'];
+                    inference_status = data['inference_status'];
+                    image_name = data['image_name'];
+                    description = data['description'];
+                    nodule_prob = data['nodule_prob'];
+                    upload_time = data['upload_time'];
+                    difficult_case = data['difficult_case'];
+                    ids = data['ids'];
+
+                    //alert("Data Loaded: " + data['description']);
+                    fillTable();
+                },
+                error: function () {
+                    alert("query failed")
+                }
+            });
         }
 	</script>
 
