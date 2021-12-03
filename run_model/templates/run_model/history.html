@@ -222,40 +222,44 @@
         var difficult_case = {{ difficult_case|safe }};
         var ids = {{ ids|safe }};
 
-		// console.log(patient_id);
-		table_html = "";
+        fillTable();
 
-		// render the table
-		for (i=0;i<image_path.length;i++){
-			var path = image_path[i];
+        function fillTable(){
+            // console.log(patient_id);
+            table_html = "";
 
-			table_html += '<tr>' + '<td>' + i + '</td>' +
-                                                         '<td>' + '<img class="img-thumbnail me-2" width="224" height="224" src=' + path +  '>' + '</td>' +
-														'<td>' + inference_status[i] + '</td>' +
-                                                        '<td>' + image_name[i] + '</td>' +
-                                                        '<td>' + description[i] + '</td>' +
-														'<td id="nod_prob_' + i + '">' + nodule_prob[i] + '</td>' +
-                                                        '<td>' + upload_time[i] + '</td>' +
-                                                        '<td>' + difficult_case[i] + '</td>' + 
-                                                        '<td><button type="button" class="btn btn-primary" onclick="location.href=\'/run_model/show_case/' + ids[i] + '\'"/>Inspect</button></td></tr>';
-		}
+            // render the table
+            for (i=image_path.length-1;i>=0;i--){
+                var path = image_path[i];
 
-		document.getElementById("table_content").innerHTML = table_html;
+                table_html += '<tr>' + '<td>' + i + '</td>' +
+                                                            '<td>' + '<img class="img-thumbnail me-2" width="224" height="224" src=' + path +  '>' + '</td>' +
+                                                            '<td>' + inference_status[i] + '</td>' +
+                                                            '<td>' + image_name[i] + '</td>' +
+                                                            '<td>' + description[i] + '</td>' +
+                                                            '<td id="nod_prob_' + i + '">' + nodule_prob[i] + '</td>' +
+                                                            '<td>' + upload_time[i] + '</td>' +
+                                                            '<td>' + difficult_case[i] + '</td>' + 
+                                                            '<td><button type="button" class="btn btn-primary" onclick="location.href=\'/run_model/show_case/' + ids[i] + '\'"/>Inspect</button></td></tr>';
+            }
 
-        // color nodule probability
-        // if < 0.5 => green
-        // if 0.5 < x < 0.7 => yellow
-        // if > 0.7 => red
-        for (i=0;i<nodule_prob.length;i++){
-            if (nodule_prob[i] < 0.5){
+            document.getElementById("table_content").innerHTML = table_html;
+
+            // color nodule probability
+            // if < 0.5 => green
+            // if 0.5 < x < 0.7 => yellow
+            // if > 0.7 => red
+            for (i=0;i<nodule_prob.length;i++){
+                if (nodule_prob[i] < 0.5){
+                    // set confidence text to green
+                    document.getElementById("nod_prob_" + i).style = "color:green;";
+                } else if (nodule_prob[i] >= 0.5 && nodule_prob[i] < 0.7){
                 // set confidence text to green
-                document.getElementById("nod_prob_" + i).style = "color:green;";
-            } else if (nodule_prob[i] >= 0.5 && nodule_prob[i] < 0.7){
-               // set confidence text to green
-               document.getElementById("nod_prob_" + i).style = "color:yellow;"; 
-            } else if (nodule_prob[i] >= 0.7){
-               // set confidence text to green
-               document.getElementById("nod_prob_" + i).style = "color:red;"; 
+                document.getElementById("nod_prob_" + i).style = "color:yellow;"; 
+                } else if (nodule_prob[i] >= 0.7){
+                // set confidence text to green
+                document.getElementById("nod_prob_" + i).style = "color:red;"; 
+                }
             }
         }
 	</script>
