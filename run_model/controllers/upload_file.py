@@ -42,7 +42,8 @@ def upload_page(request):
             # create a model query
             create_query([case])
 
-            return render(request, 'run_model/history.html')
+            # redirect to history page
+            return history(request)
         else:
             return HttpResponse("form is not valid")
     # GET (to upload file)
