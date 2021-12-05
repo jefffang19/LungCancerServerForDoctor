@@ -221,11 +221,14 @@
         var upload_time = {{ upload_time|safe }};
         var difficult_case = {{ difficult_case|safe }};
         var ids = {{ ids|safe }};
+        var need_refresh = {{ need_refresh }};
 
         fillTable();
 
         // update table after 7 second
-        setInterval(updateTable,10000);
+        if(need_refresh == 1){
+            setTimeout(updateTable,8000);
+        }
 
         function fillTable(){
             // console.log(patient_id);
@@ -281,9 +284,16 @@
                     upload_time = data['upload_time'];
                     difficult_case = data['difficult_case'];
                     ids = data['ids'];
+                    need_refresh = data['need_refresh'];
 
-                    //alert("Data Loaded: " + data['description']);
+                    // alert("Data Loaded: " + data['description']);
+                    // debug
+                    console.log("history page refreshed, table update");
                     fillTable();
+
+                    if(need_refresh == 1){
+                        setTimeout(updateTable,8000);
+                    }
                 },
                 error: function () {
                     alert("query failed")

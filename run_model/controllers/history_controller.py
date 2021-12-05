@@ -9,6 +9,7 @@ def history(request):
     # get table content
     image_path, inference_status, image_name, description, nodule_prob, upload_time, difficult_case, ids = [
     ], [], [], [], [], [], [], []
+    need_refresh = 0
 
     # get all the cases
     all_cases = Case.objects.all()
@@ -32,6 +33,7 @@ def history(request):
         if len(mp) == 0:
             inference_status.append('inferencing')
             nodule_prob.append(' ')
+            need_refresh = 1 # template need need refresh
         else:
             inference_status.append('Done')
             # get probability
@@ -45,7 +47,7 @@ def history(request):
         difficult_case.append('Unknown')
 
     template_dict = {"image_path": image_path, "inference_status": inference_status, "image_name": image_name,
-                     "description": description, "nodule_prob": nodule_prob, "upload_time": upload_time, "difficult_case": difficult_case, "ids": ids}
+                     "description": description, "nodule_prob": nodule_prob, "upload_time": upload_time, "difficult_case": difficult_case, "ids": ids, "need_refresh":need_refresh}
 
     return render(request, 'run_model/history.html', template_dict)
 
@@ -54,6 +56,7 @@ def history_data(request):
     # get table content
     image_path, inference_status, image_name, description, nodule_prob, upload_time, difficult_case, ids = [
     ], [], [], [], [], [], [], []
+    need_refresh = 0
 
     # get all the cases
     all_cases = Case.objects.all()
@@ -77,6 +80,7 @@ def history_data(request):
         if len(mp) == 0:
             inference_status.append('inferencing')
             nodule_prob.append(' ')
+            need_refresh = 1 # template need need refresh
         else:
             inference_status.append('Done')
             # get probability
@@ -90,6 +94,6 @@ def history_data(request):
         difficult_case.append('Unknown')
 
     template_dict = {"image_path": image_path, "inference_status": inference_status, "image_name": image_name,
-                     "description": description, "nodule_prob": nodule_prob, "upload_time": upload_time, "difficult_case": difficult_case, "ids": ids}
+                     "description": description, "nodule_prob": nodule_prob, "upload_time": upload_time, "difficult_case": difficult_case, "ids": ids, "need_refresh":need_refresh}
 
     return JsonResponse(template_dict, safe=False)
