@@ -43,3 +43,12 @@ class Modelpredict(models.Model):
     predict_prob_13 = models.FloatField()
     predict_prob_14 = models.FloatField()
     predict_prob_15 = models.FloatField()
+
+
+class Feedback(models.Model):
+    case = models.OneToOneField(
+        Case, on_delete=models.CASCADE, primary_key=True)
+
+    comment = models.CharField(max_length=500)
+    is_incorrect = models.BooleanField()
+    is_difficult = models.BooleanField()
