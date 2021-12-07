@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from run_model.models import Case, Modelquery, Modelpredict
+from run_model.models import Case, Modelquery, Modelpredict, Feedback
 import os
 import numpy as np
 
@@ -48,6 +48,12 @@ def show_result(request, case_id):
     template_dict['average_prob'] = np.where(
         prob > PROB_TRHESH, prob, 0).sum() / np.where(prob > PROB_TRHESH, 1, 0).sum() * 100
     template_dict['pos_thresh'] = PROB_TRHESH * 100
+
+    # get comment
+    feedback = Feedback.objects.get(case=case)
+    template_dict['comment'] = feedback.comment
+    template_dict['is_incorrect'] = 1 if feedback.is_incorrect else 0
+    template_dict['is_difficult'] = 1 if feedback.is_difficult else 0
 
     return render(request, 'run_model/show_result.html', template_dict)
 
