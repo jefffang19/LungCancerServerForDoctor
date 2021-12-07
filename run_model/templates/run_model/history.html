@@ -245,7 +245,7 @@
                                                             '<td>' + description[i] + '</td>' +
                                                             '<td id="nod_prob_' + i + '">' + nodule_prob[i] + '</td>' +
                                                             '<td>' + upload_time[i] + '</td>' +
-                                                            '<td>' + difficult_case[i] + '</td>' + 
+                                                            '<td id="difficult_case_' + i + '">' + difficult_case[i] + '</td>' + 
                                                             '<td><button type="button" class="btn btn-primary" onclick="location.href=\'/run_model/show_case/' + ids[i] + '\'"/>Inspect</button></td></tr>';
             }
 
@@ -260,11 +260,19 @@
                     // set confidence text to green
                     document.getElementById("nod_prob_" + i).style = "color:green;";
                 } else if (nodule_prob[i] >= 0.5 && nodule_prob[i] < 0.7){
-                // set confidence text to green
+                // set confidence text to yellow
                 document.getElementById("nod_prob_" + i).style = "color:yellow;"; 
                 } else if (nodule_prob[i] >= 0.7){
-                // set confidence text to green
+                // set confidence text to red
                 document.getElementById("nod_prob_" + i).style = "color:red;"; 
+                }
+            }
+
+            // difficult_case color red
+            for (i=0;i<difficult_case.length;i++){
+                if (difficult_case[i] == 'True'){
+                    // set confidence text to red
+                    document.getElementById("difficult_case_" + i).style = "color:red;"; 
                 }
             }
         }

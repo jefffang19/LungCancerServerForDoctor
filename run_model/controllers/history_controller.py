@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from run_model.models import Case, Modelquery, Modelpredict
+from run_model.models import Case, Modelquery, Modelpredict, Feedback
 import numpy as np
 import os
 from django.http import HttpResponse, JsonResponse
@@ -33,7 +33,7 @@ def history(request):
         if len(mp) == 0:
             inference_status.append('inferencing')
             nodule_prob.append(' ')
-            need_refresh = 1 # template need need refresh
+            need_refresh = 1  # template need need refresh
         else:
             inference_status.append('Done')
             # get probability
@@ -44,10 +44,17 @@ def history(request):
 
             nodule_prob.append(prob.max())
 
-        difficult_case.append('Unknown')
+        # check if has comment
+        feedback = Feedback.objects.filter(case=a_case)
+
+        # no comment
+        if(len(feedback) == 0):
+            difficult_case.append('Unknown')
+        else:
+            difficult_case.append(str(feedback[0].is_difficult))
 
     template_dict = {"image_path": image_path, "inference_status": inference_status, "image_name": image_name,
-                     "description": description, "nodule_prob": nodule_prob, "upload_time": upload_time, "difficult_case": difficult_case, "ids": ids, "need_refresh":need_refresh}
+                     "description": description, "nodule_prob": nodule_prob, "upload_time": upload_time, "difficult_case": difficult_case, "ids": ids, "need_refresh": need_refresh}
 
     return render(request, 'run_model/history.html', template_dict)
 
@@ -80,7 +87,7 @@ def history_data(request):
         if len(mp) == 0:
             inference_status.append('inferencing')
             nodule_prob.append(' ')
-            need_refresh = 1 # template need need refresh
+            need_refresh = 1  # template need need refresh
         else:
             inference_status.append('Done')
             # get probability
@@ -91,9 +98,16 @@ def history_data(request):
 
             nodule_prob.append(prob.max())
 
-        difficult_case.append('Unknown')
+        # check if has comment
+        feedback = Feedback.objects.filter(case=a_case)
+
+        # no comment
+        if(len(feedback) == 0):
+            difficult_case.append('Unknown')
+        else:
+            difficult_case.append(str(feedback[0].is_difficult))
 
     template_dict = {"image_path": image_path, "inference_status": inference_status, "image_name": image_name,
-                     "description": description, "nodule_prob": nodule_prob, "upload_time": upload_time, "difficult_case": difficult_case, "ids": ids, "need_refresh":need_refresh}
+                     "description": description, "nodule_prob": nodule_prob, "upload_time": upload_time, "difficult_case": difficult_case, "ids": ids, "need_refresh": need_refresh}
 
     return JsonResponse(template_dict, safe=False)
