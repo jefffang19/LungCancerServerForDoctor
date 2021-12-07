@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+
 <html>
 
 <head>
@@ -375,14 +376,12 @@
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="col">
-                                                    <form>
-                                                        <div class="mb-3"><label class="form-label" for="signature"><strong>Write your comment here</strong><br></label><textarea class="form-control" id="signature" rows="4" name="signature"></textarea></div>
-                                                        <div class="mb-3">
-                                                            <div class="form-check form-switch"><input class="form-check-input" type="checkbox" id="formCheck-1"><label class="form-check-label" for="formCheck-1"><strong>Check if this is a "Difficult Case"</strong></label></div>
-                                                            <div class="form-check form-switch"><input class="form-check-input" type="checkbox" id="formCheck-2"><label class="form-check-label" for="formCheck-2"><strong>Check if the result is "INCORRECT"</strong></label></div>
-                                                        </div>
-                                                        <div class="mb-3"><button class="btn btn-primary btn-sm" type="submit">Submit</button></div>
-                                                    </form>
+                                                    <div class="mb-3"><label class="form-label" for="signature"><strong>Write your comment here</strong><br></label><textarea class="form-control" id="formComment" rows="4" name="signature"></textarea></div>
+                                                    <div class="mb-3">
+                                                        <div class="form-check form-switch"><input class="form-check-input" type="checkbox" id="formCheckDifficult"><label class="form-check-label" for="formCheckDifficult"><strong>Check if this is a "Difficult Case"</strong></label></div>
+                                                        <div class="form-check form-switch"><input class="form-check-input" type="checkbox" id="formCheckIncorrect"><label class="form-check-label" for="formCheckIncorrect"><strong>Check if the result is "INCORRECT"</strong></label></div>
+                                                    </div>
+                                                    <div class="mb-3"><button class="btn btn-primary" id="commentSubmit" onclick="sendComment()">Submit</button></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -444,6 +443,9 @@
         var id = {{ id }};
         var thresh = {{ pos_thresh }}/100;
         var confidence = {{ prob|safe }};
+        var is_correct = 1;
+        var is_difficult = 0;
+        var comment = "";
 
         drawPredict();
 
@@ -457,6 +459,42 @@
                     document.getElementById("p" + i + "c").style = "color:red;";
                 }
             }
+        }
+
+        // send comment 
+        function sendComment(){
+            const difficult_form = document.getElementById('formCheckDifficult');
+            const incorrect_form = document.getElementById('formCheckIncorrect');
+            const comment_form = document.getElementById('formComment');
+
+            comment = comment_form.value;
+
+            if(difficult_form.checked){ is_difficult = 1;}
+            if(incorrect_form.checked){ is_correct = 0;}
+
+            console.log(is_correct);
+            console.log(is_difficult);
+            console.log(comment);
+
+            updateComment();
+        }
+
+        // update comment
+        function updateComment(){
+            // csrf 
+            // https://stackoverflow.com/questions/5100539/django-csrf-check-failing-with-an-ajax-post-request
+
+            $.ajax({
+                url: "/run_model/update_comment",
+                type: 'POST',
+                data:{id:id, is_correct:is_correct, is_difficult:is_difficult, comment:comment, csrfmiddlewaretoken:"{{ csrf_token }}"},
+                success: function(){
+                    alert("comment saved");
+                },
+                error: function(){
+                    alert("save comment error");
+                }
+            });
         }
 	</script>
 </body>

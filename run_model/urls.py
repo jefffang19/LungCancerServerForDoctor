@@ -16,6 +16,8 @@ urlpatterns = [
     path('update_query', views.update_query, name='update_query'),
     # save model predict result
     path('save_result', views.save_result, name='save_result'),
+    # save comment
+    path('update_comment', views.update_feedback, name='update_comment'),
     # template controller
     path('', views.index, name='index'),
     path('history', views.history, name='history'),
