@@ -1,8 +1,0 @@
-<p> Hello My Friend </p>
-{{ Hello }}
-
-<form action={% url 'test_template' %} method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Submit">
-</form>
