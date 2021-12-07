@@ -50,10 +50,16 @@ def show_result(request, case_id):
     template_dict['pos_thresh'] = PROB_TRHESH * 100
 
     # get comment
-    feedback = Feedback.objects.get(case=case)
-    template_dict['comment'] = feedback.comment
-    template_dict['is_incorrect'] = 1 if feedback.is_incorrect else 0
-    template_dict['is_difficult'] = 1 if feedback.is_difficult else 0
+    feedback = Feedback.objects.filter(case=case)
+
+    if len(feedback) == 1:
+        template_dict['comment'] = feedback[0].comment
+        template_dict['is_incorrect'] = 1 if feedback[0].is_incorrect else 0
+        template_dict['is_difficult'] = 1 if feedback[0].is_difficult else 0
+    else:
+        template_dict['comment'] = ''
+        template_dict['is_incorrect'] = 0
+        template_dict['is_difficult'] = 0
 
     return render(request, 'run_model/show_result.html', template_dict)
 
