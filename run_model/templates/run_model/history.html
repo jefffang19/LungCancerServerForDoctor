@@ -142,6 +142,12 @@
                                                 <option value="50">50</option>
                                                 <option value="100">100</option>
                                             </select>&nbsp;</label></div>
+                                    <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable"><label class="form-label">Difficult Cases&nbsp;<select class="d-inline-block form-select form-select-sm" id="difficultCaseSelect" onchange="filter_difficult_case()">
+                                                <option value="0" selected="">ALL</option>
+                                                <option value="1">True only</option>
+                                                <option value="2">False only</option>
+                                                <option value="3">Unknown Only</option>
+                                            </select>&nbsp;</label></div>        
                                 </div>
                                 <div class="col-md-6">
                                     <div class="text-md-end dataTables_filter" id="dataTable_filter"><label class="form-label"><input type="search" class="form-control form-control-sm" aria-controls="dataTable" placeholder="Search"></label></div>
@@ -307,6 +313,40 @@
                     alert("query failed")
                 }
             });
+        }
+
+        // filter table
+        function filterTable(difficult_case_cond){
+            $.ajax({
+                url: "/run_model/history_data",
+                type: 'POST',
+                data:{filter_difficult_case:difficult_case_cond ,csrfmiddlewaretoken:"{{ csrf_token }}"},
+                success: function (data) {
+                    
+                    image_path = data['image_path'];
+                    inference_status = data['inference_status'];
+                    image_name = data['image_name'];
+                    description = data['description'];
+                    nodule_prob = data['nodule_prob'];
+                    upload_time = data['upload_time'];
+                    difficult_case = data['difficult_case'];
+                    ids = data['ids'];
+                    need_refresh = data['need_refresh'];
+
+                    // alert("Data Loaded: " + data['description']);
+                    // debug
+                    console.log("history page refreshed, table update");
+                    fillTable();
+                },
+                error: function () {
+                    alert("query failed")
+                }
+            });
+        }
+
+        function filter_difficult_case(){
+            var d_select = document.getElementById('difficultCaseSelect');
+            filterTable(d_select.value);
         }
 	</script>
 
