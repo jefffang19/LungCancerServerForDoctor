@@ -51,3 +51,23 @@ def upload_page(request):
         form = UploadFileForm()
 
         return render(request, 'run_model/upload_case.html', {'form': form})
+
+
+def download_sample(request, filenum):
+    '''
+    A controller to let you download sample input image file
+    '''
+    import os
+
+    file_paths = [
+        'sample_images/0.jpg',
+        'sample_images/1.jpg',
+        'sample_images/2.png',
+    ]
+
+    with open(file_paths[filenum], 'rb') as fh:
+        response = HttpResponse(
+            fh.read(), content_type="application/vnd.ms-excel")
+        response['Content-Disposition'] = 'inline; filename=' + \
+            os.path.basename(file_paths[filenum])
+        return response

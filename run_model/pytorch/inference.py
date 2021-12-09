@@ -38,8 +38,13 @@ if __name__ == '__main__':
                                  'x{}.png'.format(i)), cv2.cvtColor(patches[i], cv2.COLOR_RGB2BGR))
 
     # predict
-    prd = fit(cls_model, patches)
+    prd, cam_img = fit(cls_model, patches)
     results = prd[:, 1]
+
+    # save cam
+    for i in range(16):
+        cv2.imwrite(os.path.join('run_model/static/run_model/patches', file_name,
+                                 'h{}.png'.format(i)), cv2.cvtColor(cam_img[i], cv2.COLOR_RGB2BGR))
 
     print('model predict : ', results)
 
