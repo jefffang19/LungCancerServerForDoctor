@@ -18,11 +18,16 @@ mv env_example .env
 ```
 python -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())'
 ```
-3. runserver
+3. database
+to use sqlite, simply
+```
+touch db.sqlite3
+```
+4. runserver
 ```
 python manage.py runserver 0:[port]
 ```
-4. in your web browser
+5. in your web browser
 ```
 127.0.0.1:[port]/run_model
 ```
