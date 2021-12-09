@@ -446,6 +446,7 @@
         var is_correct = 1;
         var is_difficult = 0;
         var comment = "";
+        var toggle_heatmap = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
         drawPredict();
         default_checkbox();
@@ -508,8 +509,16 @@
 
         // show heatmap when click on patch
         function heatClick(num){
-            im = document.getElementById("p"+num);
-            im.src = "{{ patch_loc }}/h" + num + ".png";
+            if(toggle_heatmap[num] == 0){
+                im = document.getElementById("p"+num);
+                im.src = "{{ patch_loc }}/h" + num + ".png";
+                toggle_heatmap[num] = 1;
+            } else {
+                im = document.getElementById("p"+num);
+                im.src = "{{ patch_loc }}/x" + num + ".png";
+                toggle_heatmap[num] = 0;
+            }
+            
         }
 	</script>
 </body>
