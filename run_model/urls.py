@@ -13,6 +13,9 @@ urlpatterns = [
     path('save_result', views.save_result, name='save_result'),
     # save comment
     path('update_comment', views.update_feedback, name='update_comment'),
+    # download sample images
+    path('download_sample/<int:filenum>',
+         views.download_sample, name='download_sample'),
     # template controller
     path('', views.index, name='index'),
     path('history', views.history, name='history'),
