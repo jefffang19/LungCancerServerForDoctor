@@ -54,7 +54,6 @@ def fit(model, patches):
 
     with torch.no_grad():
         # cam only support batch = 1
-        preds = []
         cams_images = []
 
         for i in range(16):
@@ -69,6 +68,9 @@ def fit(model, patches):
 
             cams_images.append(np.array(cam_result))
 
-            preds.append(pred.squeeze().cpu().numpy())
+        # monkey patch the probability
+        pred = model(patches_square)
 
-        return np.array(preds), cams_images
+        pred = nn.Softmax(dim=1)(pred)
+
+        return pred.cpu().numpy(), cams_images
