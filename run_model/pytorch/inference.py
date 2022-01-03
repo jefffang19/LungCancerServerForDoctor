@@ -6,11 +6,15 @@ import time
 from seg_patches import *
 from patches_cls import get_cls_model, fit
 import requests
+from dotenv import load_dotenv
 
 
 if __name__ == '__main__':
     if len(sys.argv) == 1:  # no cases to take care of
         exit()
+
+    load_dotenv()
+    PORT = os.getenv("PORT")
 
     print('inference argv: ', sys.argv)
 
@@ -54,7 +58,8 @@ if __name__ == '__main__':
     # get csrf token
     # https://stackoverflow.com/questions/13567507/passing-csrftoken-with-python-requests
     # Retrieve the CSRF token first
-    client.get('http://127.0.0.1:5757/run_model/get_csrf_token')  # sets cookie
+    # sets cookie
+    client.get('http://127.0.0.1:{}/run_model/get_csrf_token'.format(PORT))
 
     csrftoken = None
     if 'csrftoken' in client.cookies:
@@ -69,7 +74,7 @@ if __name__ == '__main__':
     post_data = {'case_id': case_id, 'state': 2,
                  'csrfmiddlewaretoken': csrftoken}
 
-    URL = 'http://127.0.0.1:5757/run_model/update_query'
+    URL = 'http://127.0.0.1:{}/run_model/update_query'.format(PORT)
     r = client.post(URL, data=post_data, headers=dict(Referer=URL))
 
     print('model query request result: ', r)
@@ -80,7 +85,9 @@ if __name__ == '__main__':
                  'p8': results[8], 'p9': results[9], 'p10': results[10], 'p11': results[11], 'p12': results[12], 'p13': results[13], 'p14': results[14], 'p15': results[15],
                  'csrfmiddlewaretoken': csrftoken}
 
-    URL = 'http://127.0.0.1:5757/run_model/save_result'
+    URL = 'http://127.0.0.1:{}/run_model/save_result'.format(PORT)
     r = client.post(URL, data=post_data, headers=dict(Referer=URL))
+
+    print(PORT)
 
     print('model predict request result: ', r)
