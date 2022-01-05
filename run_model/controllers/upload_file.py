@@ -35,7 +35,15 @@ def upload_page(request):
                 request.FILES['file'], generated_UUID + '.' + file_type)
 
             # save this record
-            case = Case(description=request.POST['description'], upload_time=timezone.now(
+            SEX_CHOICE = (
+                "Female",
+                "Male",
+                "Other",
+            )
+            description = "<p>Age:{}</p><p>Gender:{}</p><p>Tumer Location:{}</p>".format(
+                request.POST['age'], SEX_CHOICE[int(request.POST['gender'])], request.POST['tumer_location'])
+
+            case = Case(description=description, upload_time=timezone.now(
             ), inference_time=timezone.now(), inner_uuid=generated_UUID, origin_file_name=request.FILES['file'].name, file_path=SAVE_FILE_PATH, file_type=file_type)
             case.save()
 
