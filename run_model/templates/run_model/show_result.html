@@ -146,12 +146,12 @@
                                                                     <div class="row">
                                                                         <div class="col">
                                                                             <em>{{ image_name }}</em>
-                                                                            <div class="row">
+                                                                            {% comment %} <div class="row">
                                                                                 <div class="col">
                                                                                     <span>Description : </span>
-                                                                                    <em>{{ description }}</em>
+                                                                                    <em>{{ description|safe }}</em>
                                                                                 </div>
-                                                                            </div>
+                                                                            </div> {% endcomment %}
                                                                             <div class="row">
                                                                                 <div class="col">
                                                                                     <em>{{ upload_time }}</em>
@@ -165,6 +165,12 @@
                                                     </div>
                                                     <div class="row">
                                                         <div class="col"><img width="600" src="{{ origin_image_path }}"></div>
+                                                    </div>
+                                                     <div class="row">
+                                                        <div class="col">
+                                                            <span>Description : </span>
+                                                            <em>{{ description|safe }}</em>
+                                                        </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col"><button class="btn btn-primary" type="button" onclick="location.href='/run_model/show_raw/{{ id }}'">Show Original</button></div>
