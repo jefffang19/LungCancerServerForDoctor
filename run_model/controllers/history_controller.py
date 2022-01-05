@@ -132,14 +132,14 @@ def history_data(request):
 
             # no comment
             if(len(feedback) == 0):
-                if int(request.POST['filter_difficult_case']) != 3 and int(request.POST['filter_difficult_case']) != 0:
+                if int(request.POST['filter_case']) != 3 and int(request.POST['filter_case']) != 0:
                     continue
 
                 difficult_case.append('Unknown')
             else:
                 _is_difficult = feedback[0].is_difficult
 
-                if (int(request.POST['filter_difficult_case']) == 1 and not _is_difficult) or (int(request.POST['filter_difficult_case']) == 2 and _is_difficult) or (int(request.POST['filter_difficult_case']) == 3):
+                if (int(request.POST['filter_case']) == 1 and not _is_difficult) or (int(request.POST['filter_case']) == 2 and _is_difficult) or (int(request.POST['filter_case']) == 3):
                     continue
 
                 difficult_case.append(str(_is_difficult))

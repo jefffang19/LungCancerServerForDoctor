@@ -142,11 +142,10 @@
                                                 <option value="50">50</option>
                                                 <option value="100">100</option>
                                             </select>&nbsp;</label></div>
-                                    <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable"><label class="form-label">Difficult Cases&nbsp;<select class="d-inline-block form-select form-select-sm" id="difficultCaseSelect" onchange="filter_difficult_case()">
+                                    <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable"><label class="form-label">Show Cases&nbsp;<select class="d-inline-block form-select form-select-sm" id="CaseSelect" onchange="filter_case()">
                                                 <option value="0" selected="">ALL</option>
-                                                <option value="1">True only</option>
-                                                <option value="2">False only</option>
-                                                <option value="3">Unknown Only</option>
+                                                <option value="1">Not viewed</option>
+                                                <option value="2">Viewed</option>
                                             </select>&nbsp;</label></div>        
                                 </div>
                                 <div class="col-md-6">
@@ -164,7 +163,7 @@
                                             <th>Description</th>
                                             <th>Nodule Probability</th>
                                             <th>Upload Time</th>
-                                            <th>Difficult Case</th>
+                                            <th>Feedback</th>
                                             <th>Inspect</th>
                                         </tr>
                                     </thead>
@@ -179,7 +178,7 @@
                                             <td><strong>Description</strong></td>
                                             <td><strong>Nodule Probability</strong></td>
                                             <td><strong>Upload Time</strong></td>
-                                            <td><strong>Difficult Case</strong></td>
+                                            <td><strong>Feedback</strong></td>
                                             <td><strong>Inspect</strong></td>
                                         </tr>
                                     </tfoot>
@@ -316,11 +315,11 @@
         }
 
         // filter table
-        function filterTable(difficult_case_cond){
+        function filterTable(case_cond){
             $.ajax({
                 url: "/run_model/history_data",
                 type: 'POST',
-                data:{filter_difficult_case:difficult_case_cond ,csrfmiddlewaretoken:"{{ csrf_token }}"},
+                data:{filter_case:case_cond ,csrfmiddlewaretoken:"{{ csrf_token }}"},
                 success: function (data) {
                     
                     image_path = data['image_path'];
@@ -344,8 +343,8 @@
             });
         }
 
-        function filter_difficult_case(){
-            var d_select = document.getElementById('difficultCaseSelect');
+        function filter_case(){
+            var d_select = document.getElementById('CaseSelect');
             filterTable(d_select.value);
         }
 	</script>
