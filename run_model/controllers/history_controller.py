@@ -65,7 +65,7 @@ def history_data(request):
     # GET
     if request.method == 'GET':
         # get table content
-        image_path, inference_status, image_name, description, nodule_prob, upload_time, difficult_case, ids = [
+        image_path, inference_status, image_name, description, nodule_prob, upload_time, feedbacks, ids = [
         ], [], [], [], [], [], [], []
         need_refresh = 0
 
@@ -108,19 +108,21 @@ def history_data(request):
 
             # no comment
             if(len(feedback) == 0):
-                difficult_case.append('Unknown')
+                feedbacks.append('No feedback')
             else:
-                difficult_case.append(str(feedback[0].is_difficult))
+                _feedback = "<p>difficult case: <strong>{}</strong></p><p>predict incorrect : <strong>{}</strong></p><p>report missed nodule: <strong>{}</strong></p><p>comment: <strong>{}</strong></p>".format(
+                    feedback[0].is_difficult, feedback[0].is_incorrect, feedback[0].report_missed, feedback[0].comment)
+                feedbacks.append(_feedback)
 
         template_dict = {"image_path": image_path, "inference_status": inference_status, "image_name": image_name,
-                         "description": description, "nodule_prob": nodule_prob, "upload_time": upload_time, "difficult_case": difficult_case, "ids": ids, "need_refresh": need_refresh}
+                         "description": description, "nodule_prob": nodule_prob, "upload_time": upload_time, "feedbacks": feedbacks, "ids": ids, "need_refresh": need_refresh}
 
         return JsonResponse(template_dict, safe=False)
     # POST
     # filter out some datas
     # get table content
     if request.method == 'POST':
-        image_path, inference_status, image_name, description, nodule_prob, upload_time, difficult_case, ids = [
+        image_path, inference_status, image_name, description, nodule_prob, upload_time, feedbacks, ids = [
         ], [], [], [], [], [], [], []
         need_refresh = 0
 
@@ -134,17 +136,18 @@ def history_data(request):
 
             # no comment
             if(len(feedback) == 0):
-                if int(request.POST['filter_case']) != 3 and int(request.POST['filter_case']) != 0:
+                # if filter case condition is 2 (viewed case only)
+                if int(request.POST['filter_case']) == 2:
                     continue
 
-                difficult_case.append('Unknown')
+                feedbacks.append('No feedback')
+            # has feedback, but filter condition is 1
+            elif int(request.POST['filter_case']) == 1:
+                continue
             else:
-                _is_difficult = feedback[0].is_difficult
-
-                if (int(request.POST['filter_case']) == 1 and not _is_difficult) or (int(request.POST['filter_case']) == 2 and _is_difficult) or (int(request.POST['filter_case']) == 3):
-                    continue
-
-                difficult_case.append(str(_is_difficult))
+                _feedback = "<p>difficult case: <strong>{}</strong></p><p>predict incorrect : <strong>{}</strong></p><p>report missed nodule: <strong>{}</strong></p><p>comment: <strong>{}</strong></p>".format(
+                    feedback[0].is_difficult, feedback[0].is_incorrect, feedback[0].report_missed, feedback[0].comment)
+                feedbacks.append(_feedback)
 
             # get prediction
             mp = Modelpredict.objects.filter(case=a_case)
@@ -176,6 +179,6 @@ def history_data(request):
                 nodule_prob.append(prob.max())
 
         template_dict = {"image_path": image_path, "inference_status": inference_status, "image_name": image_name,
-                         "description": description, "nodule_prob": nodule_prob, "upload_time": upload_time, "difficult_case": difficult_case, "ids": ids, "need_refresh": need_refresh}
+                         "description": description, "nodule_prob": nodule_prob, "upload_time": upload_time, "feedbacks": feedbacks, "ids": ids, "need_refresh": need_refresh}
 
         return JsonResponse(template_dict, safe=False)
