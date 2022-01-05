@@ -5,7 +5,7 @@ NCKU IIR lab
 We develop a lung cancer lung nodule detection model. So we develop a website to run the model
 
 ## How to install
-[![Python 3.6](https://img.shields.io/badge/python-3.6-blue.svg)](https://www.python.org/downloads/release/python-360/)
+[![Python 3.6](https://img.shields.io/badge/python-3.7-blue.svg)](https://www.python.org/downloads/release/python-370/)
 
 docker install : to be continue
 
