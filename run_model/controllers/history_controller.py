@@ -7,7 +7,7 @@ from django.http import HttpResponse, JsonResponse
 
 def history(request):
     # get table content
-    image_path, inference_status, image_name, description, nodule_prob, upload_time, difficult_case, ids = [
+    image_path, inference_status, image_name, description, nodule_prob, upload_time, feedbacks, ids = [
     ], [], [], [], [], [], [], []
     need_refresh = 0
 
@@ -49,12 +49,14 @@ def history(request):
 
         # no comment
         if(len(feedback) == 0):
-            difficult_case.append('Unknown')
+            feedbacks.append('No feedback')
         else:
-            difficult_case.append(str(feedback[0].is_difficult))
+            _feedback = "<p>difficult case: <strong>{}</strong></p><p>predict incorrect : <strong>{}</strong></p><p>report missed nodule: <strong>{}</strong></p><p>comment: <strong>{}</strong></p>".format(
+                feedback[0].is_difficult, feedback[0].is_incorrect, feedback[0].report_missed, feedback[0].comment)
+            feedbacks.append(_feedback)
 
     template_dict = {"image_path": image_path, "inference_status": inference_status, "image_name": image_name,
-                     "description": description, "nodule_prob": nodule_prob, "upload_time": upload_time, "difficult_case": difficult_case, "ids": ids, "need_refresh": need_refresh}
+                     "description": description, "nodule_prob": nodule_prob, "upload_time": upload_time, "feedbacks": feedbacks, "ids": ids, "need_refresh": need_refresh}
 
     return render(request, 'run_model/history.html', template_dict)
 

@@ -224,7 +224,7 @@
         var description = {{ description|safe }};
         var nodule_prob = {{ nodule_prob|safe }};
         var upload_time = {{ upload_time|safe }};
-        var difficult_case = {{ difficult_case|safe }};
+        var feedbacks = {{ feedbacks|safe }};
         var ids = {{ ids|safe }};
         var need_refresh = {{ need_refresh }};
 
@@ -250,7 +250,7 @@
                                                             '<td>' + description[i] + '</td>' +
                                                             '<td id="nod_prob_' + i + '">' + nodule_prob[i] + '</td>' +
                                                             '<td>' + upload_time[i] + '</td>' +
-                                                            '<td id="difficult_case_' + i + '">' + difficult_case[i] + '</td>' + 
+                                                            '<td id="feedbacks_' + i + '">' + feedbacks[i] + '</td>' + 
                                                             '<td><button type="button" class="btn btn-primary" onclick="location.href=\'/run_model/show_case/' + ids[i] + '\'"/>Inspect</button></td></tr>';
             }
 
@@ -272,14 +272,6 @@
                 document.getElementById("nod_prob_" + i).style = "color:red;"; 
                 }
             }
-
-            // difficult_case color red
-            for (i=0;i<difficult_case.length;i++){
-                if (difficult_case[i] == 'True'){
-                    // set confidence text to red
-                    document.getElementById("difficult_case_" + i).style = "color:red;"; 
-                }
-            }
         }
 
         // update table if some rows are still pending
@@ -295,7 +287,7 @@
                     description = data['description'];
                     nodule_prob = data['nodule_prob'];
                     upload_time = data['upload_time'];
-                    difficult_case = data['difficult_case'];
+                    feedbacks = data['feedbacks'];
                     ids = data['ids'];
                     need_refresh = data['need_refresh'];
 
@@ -328,7 +320,7 @@
                     description = data['description'];
                     nodule_prob = data['nodule_prob'];
                     upload_time = data['upload_time'];
-                    difficult_case = data['difficult_case'];
+                    feedbacks = data['feedbacks'];
                     ids = data['ids'];
                     need_refresh = data['need_refresh'];
 
