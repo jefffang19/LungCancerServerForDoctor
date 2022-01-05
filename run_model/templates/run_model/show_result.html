@@ -380,6 +380,7 @@
                                                     <div class="mb-3">
                                                         <div class="form-check form-switch"><input class="form-check-input" type="checkbox" id="formCheckDifficult"><label class="form-check-label" for="formCheckDifficult"><strong>Check if this is a "Difficult Case"</strong></label></div>
                                                         <div class="form-check form-switch"><input class="form-check-input" type="checkbox" id="formCheckIncorrect"><label class="form-check-label" for="formCheckIncorrect"><strong>Check if the result is "INCORRECT"</strong></label></div>
+                                                        <div class="form-check form-switch"><input class="form-check-input" type="checkbox" id="formCheckReportMissed"><label class="form-check-label" for="formCheckReportMissed"><strong>Check if the report MISSED the nodule</strong></label></div>
                                                     </div>
                                                     <div class="mb-3"><button class="btn btn-primary" id="commentSubmit" onclick="sendComment()">Submit</button></div>
                                                 </div>
@@ -445,6 +446,7 @@
         var confidence = {{ prob|safe }};
         var is_correct = 1;
         var is_difficult = 0;
+        var report_missed = 0;
         var comment = "";
         var toggle_heatmap = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
@@ -467,15 +469,18 @@
         function sendComment(){
             const difficult_form = document.getElementById('formCheckDifficult');
             const incorrect_form = document.getElementById('formCheckIncorrect');
+            const report_missed_form = document.getElementById('formCheckReportMissed');
             const comment_form = document.getElementById('formComment');
 
             comment = comment_form.value;
 
             if(difficult_form.checked){ is_difficult = 1;}
             if(incorrect_form.checked){ is_correct = 0;}
+            if(report_missed_form.checked){ report_missed = 1; }
 
             console.log(is_correct);
             console.log(is_difficult);
+            console.log(report_missed);
             console.log(comment);
 
             updateComment();
@@ -489,7 +494,7 @@
             $.ajax({
                 url: "/run_model/update_comment",
                 type: 'POST',
-                data:{id:id, is_correct:is_correct, is_difficult:is_difficult, comment:comment, csrfmiddlewaretoken:"{{ csrf_token }}"},
+                data:{id:id, is_correct:is_correct, is_difficult:is_difficult, report_missed:report_missed, comment:comment, csrfmiddlewaretoken:"{{ csrf_token }}"},
                 success: function(){
                     alert("comment saved");
                 },
@@ -503,8 +508,10 @@
         function default_checkbox(){
             var difficult_form = document.getElementById('formCheckDifficult');
             var incorrect_form = document.getElementById('formCheckIncorrect');
+            var report_missed_form = document.getElementById('formCheckReportMissed');
             if({{ is_incorrect }} == 1){ difficult_form.checked = true; }
             if({{ is_difficult }} == 1){ incorrect_form.checked = true; }
+            if({{ report_missed }} == 1){ report_missed_form.checked = true; }
         }
 
         // show heatmap when click on patch
