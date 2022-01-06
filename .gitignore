@@ -142,10 +142,12 @@ GitHub.sublime-settings
 # upload file
 run_model/static/run_model/uploaded_files/*.png
 run_model/static/run_model/uploaded_files/*.jpg
+run_model/static/run_model/uploaded_files/*.jpeg
 
 # patches files
 run_model/static/run_model/patches/*/*.png
 run_model/static/run_model/patches/*/*.jpg
+run_model/static/run_model/patches/*/*.jpeg
 
 # pytorch
 *.pth
