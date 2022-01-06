@@ -144,7 +144,8 @@ run_model/static/run_model/uploaded_files/*.png
 run_model/static/run_model/uploaded_files/*.jpg
 
 # patches files
-run_model/static/run_model/patches/*
+run_model/static/run_model/patches/*/*.png
+run_model/static/run_model/patches/*/*.jpg
 
 # pytorch
 *.pth
