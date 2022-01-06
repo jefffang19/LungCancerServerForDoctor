@@ -33,7 +33,7 @@ def show_result(request, case_id):
         'p15'] = mp.predict_prob_12, mp.predict_prob_13, mp.predict_prob_14, mp.predict_prob_15
 
     # get patches saved location
-    template_dict['patch_loc'] = mp.predict_path[9:]
+    template_dict['patch_loc'] = mp.predict_path[9:].replace("\\", '/')
 
     # calculate model statistic
     prob = [mp.predict_prob_0, mp.predict_prob_1, mp.predict_prob_2, mp.predict_prob_3, mp.predict_prob_4, mp.predict_prob_5, mp.predict_prob_6, mp.predict_prob_7,
