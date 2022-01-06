@@ -5,7 +5,7 @@ NCKU IIR lab
 We develop a lung cancer lung nodule detection model. So we develop a website to run the model
 
 ## How to install
-[![Python 3.6](https://img.shields.io/badge/python-3.7-blue.svg)](https://www.python.org/downloads/release/python-370/)
+[![Python 3.7](https://img.shields.io/badge/python-3.7-blue.svg)](https://www.python.org/downloads/release/python-370/)
 
 docker install : to be continue
 
@@ -22,10 +22,15 @@ python -c 'from django.core.management.utils import get_random_secret_key; print
 to use sqlite, simply
 ```
 touch db.sqlite3
+
+python manage.py runserver migrate
 ```
 4. runserver
 ```
 python manage.py runserver 0:[port]
+
+or on windows
+python manage.py runserver [your ip]:[port]
 ```
 5. in your web browser
 ```
